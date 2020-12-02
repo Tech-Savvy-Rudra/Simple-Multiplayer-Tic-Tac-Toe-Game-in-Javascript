@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta name = "viewport" content = "width = device_width, initial_scale = 1.0, user-scalable = no" />
+<meta charset = "UTF-8" />
+<meta content="Simple Tic Tac Toe Game by Rudra" author="Rudra" />
+<title>Simple Tic Tac Toe Game</title>
+<style>
+div {
+    width: 280px;
+    height: 280px;
+    background-color: yellow;
+    color: red;
+    font-size: 240px;
+    text-align: center;
+}
+.down {
+    border-bottom-style: solid;
+    border-bottom-color: red; 
+} 
+.right {
+    border-right-style: solid;
+    border-right-color: red;
+} 
+td {
+    margin: 0px;
+    padding: 0px;
+}
+table {
+    border-collapse: collapse;
+    margin-top: 15%;
+    margin-left: 5%;
+    margin-right: 5%; 
+} 
+body {
+    text-align: center;
+    background-color: yellow;
+} 
+th {
+    color: red;
+    font-size: 200px;
+    text-align: center;
+    font-weight: 110;
+    font-family: "Times New roman", Helvetica;
+}
+#gameCreator {
+    font-size: 90px;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+#gap {
+    height: 100px;
+}
+</style>
+</head>
+<body>
+<table>
+<tr>
+<th colspan=3 id="turnIndicator">X turn</th>
+</tr>
+<tr>
+<td class="right down">
+<div id="0" onclick="move('0');"></div>
+</td>
+<td class="right down">
+<div id="1" onclick="move('1');"></div>
+</td>
+<td>
+<div id="2" class="down" onclick="move('2');"></div> 
+</td>
+</tr>
+<tr>
+<td class="right down">
+<div id="3" onclick="move('3');"></div>
+</td>
+<td class="right down">
+<div id="4" onclick="move('4');"></div>
+</td>
+<td>
+<div id="5" class="down" onclick="move('5');"></div>
+</td>
+</tr>
+<tr>
+<td class="right">
+<div id="6" onclick="move('6');"></div>
+</td>
+<td class="right">
+<div id="7" onclick="move('7');"></div>
+</td>
+<td>
+<div id="8" onclick="move('8');"></div>
+</td>
+</tr>
+<tr>
+<td><div id="gap"></div><td>
+</tr>
+<tr>
+<th colspan=3 id="gameCreator">Made by Rudra</th>
+</tr>
+</table>
+<script>
+var gameState = [null, null, null, null, null, null, null, null, null];
+var playerChance = "X";
+function gebi(idofel) {
+    return document.getElementById(idofel);
+}
+function move(ide) {
+    if (gameState[parseInt(ide)]== null) {
+        gebi(ide).innerHTML = playerChance;
+        gameState[parseInt(ide)] = playerChance;
+        checkWinner();
+        changeChance();
+    } else {
+        alert("Selected box is already filled");
+   } 
+}
+function changeChance() {
+    if (playerChance == "X") {
+        playerChance = "0";
+    } else {
+        playerChance = "X";
+    } 
+    gebi("turnIndicator").innerHTML = playerChance + " turn";
+}
+function checkWinner() {
+    if (gameState[0] == gameState[1] && gameState[1] == gameState[2] && gameState[0] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[3] == gameState[4] && gameState[4] == gameState[5] && gameState[3] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[6] == gameState[7] && gameState[7] == gameState[8] && gameState[6] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[0] == gameState[3] && gameState[3] == gameState[6] && gameState[0] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[1] == gameState[4] && gameState[4] == gameState[7] && gameState[1] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[2] == gameState[5] && gameState[5] == gameState[8] && gameState[2] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[0] == gameState[4] && gameState[4] == gameState[8] && gameState[0] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[2] == gameState[4] && gameState[4] == gameState[6] && gameState[2] != null) {
+    alert(playerChance + " has won the game");
+    reset();
+    } else if (gameState[0] != null && gameState[1] != null && gameState[2] != null && gameState[3] != null && gameState[4] != null && gameState[5] != null && gameState[6] != null && gameState[7] != null && gameState[8] != null) {
+        alert("Draw: The game has tied up");
+        reset();
+   } 
+}
+function reset() {
+    window.gameState = [null, null, null, null, null, null, null, null, null];
+    window.playerChance = "X";
+    for (var i = 0; i < 9; i++) {
+        gebi(parseInt(i)).innerHTML = null;
+    }
+} 
+</script>
+</body>
+</html>
